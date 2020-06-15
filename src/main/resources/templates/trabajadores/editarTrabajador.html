@@ -3,25 +3,25 @@
       xmlns:th="http://www.thymeleaf.org"
       >
   <head th:replace="plantillas/plantillaCssScript :: head">
-    <title>Agregar Trabajador</title>
-    <meta charset="UTF-8"/>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
   </head>
   <body>
+
     <section th:replace="plantillas/plantillaPrincipal :: headerPrincipal"></section>
 
     <section id="contenido">
-
-
       <form th:action="@{/trabajadores/guardarTrabajador}" th:object="${trabajador}"
             method="POST">
         <div class="container">
           <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-6">
               <div class="card">
                 <div class="card-header">
                   <h1>[[#{agregarTrabajador.titulo}]]</h1>
                 </div>
-
+                
+                <input type="hidden" name="idTrabajador" th:field="*{idTrabajador}"/>
                 <div class="card-body">
                   <div class="form-group">
                     <label for="nombre">[[#{trabajador.nombre}]]</label>
@@ -90,7 +90,6 @@
         </div>
       </form>
     </section>
-
     <section th:replace="plantillas/plantillaPrincipal :: footerPrincipal"></section>
   </body>
 </html>

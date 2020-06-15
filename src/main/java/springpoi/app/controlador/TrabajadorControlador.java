@@ -5,16 +5,9 @@
  */
 package springpoi.app.controlador;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +15,6 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -39,8 +31,6 @@ public class TrabajadorControlador {
     @Autowired
     private ITrabajadorServicio trabajadorServicio;
     
-    @Autowired
-    private ServletContext context;
     
     @InitBinder
     public void initBinder(WebDataBinder binder){
@@ -70,62 +60,42 @@ public class TrabajadorControlador {
         
         log.info("entrando al metodo Agregar a la BD");
         if(result.hasErrors()){
+            if(trabajador.getIdTrabajador() != null){
+                
+                return "trabajadores/editarTrabajador";
+            }
+            
             log.info("Hubo un error , redirigiendo hacia la vista agregarTrabajador");
             log.info(result.toString());
             return "trabajadores/agregarTrabajador";
         }
         
+        
         trabajadorServicio.guardar(trabajador);
         return "redirect:/";
     }
     
-    @GetMapping(value="/crearPdf")
-    public String crearPdf(HttpServletRequest request , HttpServletResponse response){
-        
-        List<Trabajador> trabajadores = trabajadorServicio.listarTrabajadores();
-        boolean bandera = trabajadorServicio.crearPdf(trabajadores , context , request , response);
-        
-        if(bandera){
-            String rutaCompleta = request.getServletContext().getRealPath("/resources/reportes/"+"trabajadores"+".pdf");
-            filedownload(rutaCompleta , response , "trabajadores.pdf");
-        }
-                
+    @GetMapping("/modificarTrabajador")
+    public String modificarTrabajador(Model model , Trabajador trabajador){
+    
         return null;
     }
-
-    private void filedownload(String rutaCompleta, HttpServletResponse response, String nombreArchivo) {
+    
+    @GetMapping("/eliminarTrabajador")
+    public String eliminarTrabajador(Trabajador trabajador){
         
-        File file = new File(rutaCompleta);
-        final int BUFFER_SIZE= 4096;
-        if(file.exists()){
-            try{
-                
-                FileInputStream inputStream = new FileInputStream(file);
-                String tipoMime = context.getMimeType(rutaCompleta);
-                response.setContentType(tipoMime);
-                response.setHeader("content-disposition", "attachment; filename="+nombreArchivo);
-                OutputStream outputStream = response.getOutputStream();
-                
-                byte[] buffer = new byte[BUFFER_SIZE];
-                
-                int bytesRead = -1 ;
-                
-                while((bytesRead = inputStream.read(buffer))!= -1){
-                    
-                    outputStream.write(buffer , 0 , bytesRead);
-                }
-                
-                inputStream.close();
-                outputStream.close();
-                file.delete();
-                
-            }catch(Exception e){
-                
-                e.printStackTrace();
-            }
+        trabajadorServicio.eliminar(trabajador);
         
-        }
+        return "redirect:/trabajadores/listarTrabajadores";
     }
+    
+    @GetMapping("/editarTrabajador/{idTrabajador}")
+    public String editar(Trabajador trabajador, Model model){
+        trabajador = trabajadorServicio.encontrarTrabajador(trabajador);
+        model.addAttribute("trabajador", trabajador);
+        return "trabajadores/editarTrabajador";
+    }
+    
     
     
     

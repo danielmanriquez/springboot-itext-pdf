@@ -12,10 +12,10 @@
     <section>
       <div class="container">
         <div class="row">
-          <div class="col-3">
+          <div class="col-md-3">
             <ul class="list-group text-primary">
               <li class="list-group-item bg-dark">
-                <a th:href="@{/trabajadores/crearPdf}">[[#{menu.generarListaPdf}]]</a>
+                <a th:href="@{/pdf/crearPdf}">[[#{menu.generarListaPdf}]]</a>
               </li>
               <li class="list-group-item bg-dark">FUTURA OPCION</li>
               <li class="list-group-item bg-dark">FUTURA OPCION</li>
@@ -24,19 +24,18 @@
             </ul>
           </div>
 
-          <div class="col-9">
-            <table class="table text-primary">
+          <div class="col-md-9">
+            <table class="table text-primary table-responsive">
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">[[#{trabajador.idTrabajador}]]</th>
                   <th scope="col">[[#{trabajador.nombre}]]</th>
                   <th scope="col">[[#{trabajador.apellido}]]</th>
-                  <!--  <th scope="col">[[#{trabajador.fechaNacimiento}]]</th> -->
                   <th scope="col">[[#{trabajador.fechaNacimiento}]]</th>
-                  
                   <th scope="col">[[#{trabajador.rut}]]</th>
                   <th scope="col">[[#{trabajador.afp}]]</th>
                   <th scope="col">[[#{trabajador.salud}]]</th>
+                  <th scope="col">[[#{menu.opciones}]]</th>
 
                 </tr>
               </thead>
@@ -48,12 +47,26 @@
                   <td>[[${trabajador.idTrabajador}]]</td>
                   <td>[[${trabajador.nombre}]]</td>
                   <td>[[${trabajador.apellido}]]</td>
-                  <!--  <td>[[${trabajador.fechaNacimiento}]]</td> -->
                   <td>[[${#dates.format(trabajador.fechaNacimiento ,'yyyy-MM-dd')}]]</td>
-                  
                   <td>[[${trabajador.rut}]]</td>
                   <td>[[${trabajador.afp}]]</td>
                   <td>[[${trabajador.salud}]]</td>
+                  <td>
+
+                    <a th:href="@{/trabajadores/eliminarTrabajador(idTrabajador=${trabajador.idTrabajador})}"
+                       class="btn btn-inline btn-dark">
+                      <i class="fas fa-user-times"></i>
+                      <!--[[#{menu.borrar}]]-->
+                    </a>
+                    
+                    <a th:href="@{/trabajadores/editarTrabajador/} + ${trabajador.idTrabajador}"
+                       class="btn btn-inline btn-dark">
+                      <i class="fas fa-edit"></i>
+                      <!--[[#{menu.editar}]]-->
+                    </a>
+
+
+                  </td>
 
                 </tr>
 
