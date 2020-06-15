@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,7 +24,6 @@ public class Trabajador implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Integer idTrabajador;
     
     @NotBlank
@@ -32,6 +32,7 @@ public class Trabajador implements Serializable {
     @NotBlank
     private String apellido;
     
+    @Pattern(regexp="[0-9]{2}[.][\\d]{3}[.][\\d]{3}[-][\\d]{1}")
     @NotBlank
     private String rut;
     

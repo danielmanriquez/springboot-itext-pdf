@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      >
+  <head>
+    <title>PlantillaInicio</title>
+  </head>
+  <body>
+
+    <section th:fragment="header">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="card bg-dark text-center text-primary">
+              <h1><a href="#" class="text-decoration-none"><i class="fab fa-affiliatetheme"></i> [[#{inicio.titulo}]]</a></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+    <section th:fragment="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="card bg-dark text-primary text-center">
+              [[#{inicio.footer}]]
+            </div>
+          </div>
+        </div>
+
+    </section>
+
+  </body>
+</html>
