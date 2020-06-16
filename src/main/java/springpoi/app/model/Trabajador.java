@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
@@ -46,5 +47,7 @@ public class Trabajador implements Serializable {
     
     @NotBlank
     private String salud;
+    
+    
     
 }
