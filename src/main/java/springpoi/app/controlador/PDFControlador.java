@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import springpoi.app.model.Trabajador;
 import springpoi.app.servicio.ITrabajadorServicio;
+import springpoi.app.util.GenerarLiquidacion;
 
 @Controller
 @RequestMapping("/pdf")
@@ -38,6 +39,21 @@ public class PDFControlador {
                 
         return null;
     }
+    
+    @GetMapping(value="/crearPdfLiquidacion")
+    public String crearPdfLiquidacion(Trabajador trabajador, HttpServletRequest request , HttpServletResponse response){
+        
+        trabajador = trabajadorServicio.encontrarTrabajador(trabajador);
+        boolean bandera = GenerarLiquidacion.crearLiquidacionTrabajador(trabajador, context, request, response);
+        
+        if(bandera){
+            String rutaCompleta = request.getServletContext().getRealPath("/resources/reportes/"+"trabajador_"+trabajador.getIdTrabajador()+".pdf");
+            filedownload(rutaCompleta , response , "trabajador_"+trabajador.getIdTrabajador()+".pdf");
+        }
+                
+        return null;
+    }
+    
 
     private void filedownload(String rutaCompleta, HttpServletResponse response, String nombreArchivo) {
         

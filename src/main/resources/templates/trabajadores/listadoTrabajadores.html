@@ -12,7 +12,7 @@
     <section>
       <div class="container">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-2">
             <ul class="list-group text-primary">
               <li class="list-group-item bg-dark">
                 <a th:href="@{/pdf/crearPdf}">[[#{menu.generarListaPdf}]]</a>
@@ -24,7 +24,7 @@
             </ul>
           </div>
 
-          <div class="col-md-9">
+          <div class="col-md-10">
             <table class="table text-primary table-responsive">
               <thead class="thead-dark">
                 <tr>
@@ -58,13 +58,18 @@
                       <i class="fas fa-user-times"></i>
                       <!--[[#{menu.borrar}]]-->
                     </a>
-                    
+
                     <a th:href="@{/trabajadores/editarTrabajador/} + ${trabajador.idTrabajador}"
                        class="btn btn-inline btn-dark">
                       <i class="fas fa-edit"></i>
                       <!--[[#{menu.editar}]]-->
                     </a>
 
+                    <a th:href="@{/pdf/crearPdfLiquidacion(idTrabajador=${trabajador.idTrabajador})}"
+                       class="btn btn-inline btn-dark">
+                      <i class="fas fa-file-pdf"></i>
+                      <!--[[#{menu.borrar}]]-->
+                    </a>
 
                   </td>
 
