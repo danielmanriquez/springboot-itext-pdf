@@ -19,8 +19,8 @@ public class Main {
        ITrabajadorServicio trabajadorServicio = context.getBean(TrabajadorServicio.class);
        for (Trabajador trabajador : trabajadorServicio.listarTrabajadores()){
        
-            System.out.println("Nombre: "+ trabajador.getNombre());
-            System.out.println("Apellido: "+ trabajador.getApellido());
+            //System.out.println("Nombre: "+ trabajador.getNombre());
+            //System.out.println("Apellido: "+ trabajador.getApellido());
        }   
 }
     

@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       >
   <head th:replace="plantillas/plantillaCssScript :: head">
-    <title>TODO supply a title</title>
+    <title>Editar Trabajador</title>
     <meta charset="UTF-8">
   </head>
   <body>
@@ -24,13 +24,23 @@
                 <input type="hidden" name="idTrabajador" th:field="*{idTrabajador}"/>
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="nombre">[[#{trabajador.nombre}]]</label>
-                    <input type="text" class="form-control" th:field="*{nombre}"/>
+                    <label for="primerNombre">[[#{trabajador.primerNombre}]]</label>
+                    <input type="text" class="form-control" th:field="*{primerNombre}"/>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="segundoNombre">[[#{trabajador.segundoNombre}]]</label>
+                    <input type="text" class="form-control" th:field="*{segundoNombre}"/>
                   </div>
 
                   <div class="form-group">
-                    <label for="apellido">[[#{trabajador.apellido}]]</label>
-                    <input type="text" class="form-control" th:field="*{apellido}"/>
+                    <label for="primerApellido">[[#{trabajador.primerApellido}]]</label>
+                    <input type="text" class="form-control" th:field="*{primerApellido}"/>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="segundoApellido">[[#{trabajador.segundoApellido}]]</label>
+                    <input type="text" class="form-control" th:field="*{segundoApellido}"/>
                   </div>
 
                   <div class="form-group">
@@ -62,12 +72,20 @@
             </div>
             <div class="col-md-5">
 
-              <div th:if="${#fields.hasErrors('nombre')}" class="alert alert-warning" role="alert" >
-                <span th:errors="*{nombre}"></span>
+              <div th:if="${#fields.hasErrors('primerNombre')}" class="alert alert-warning" role="alert" >
+                <span th:errors="*{primerNombre}"></span>
               </div>
               
-              <div th:if="${#fields.hasErrors('apellido')}" class="alert alert-warning" role="alert" >
-                <span th:errors="*{apellido}"></span>
+              <div th:if="${#fields.hasErrors('segundoNombre')}" class="alert alert-warning" role="alert" >
+                <span th:errors="*{segundoNombre}"></span>
+              </div>
+              
+              <div th:if="${#fields.hasErrors('primerApellido')}" class="alert alert-warning" role="alert" >
+                <span th:errors="*{primerApellido}"></span>
+              </div>
+              
+              <div th:if="${#fields.hasErrors('segundoApellido')}" class="alert alert-warning" role="alert" >
+                <span th:errors="*{segundoApellido}"></span>
               </div>
               
               <div th:if="${#fields.hasErrors('rut')}" class="alert alert-warning" role="alert" >

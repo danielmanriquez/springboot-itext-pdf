@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import springpoi.app.editores.MayusculasEditor;
 import springpoi.app.model.Trabajador;
 import springpoi.app.servicio.ITrabajadorServicio;
 
@@ -26,6 +27,9 @@ public class TrabajadorControlador {
     @Autowired
     private ITrabajadorServicio trabajadorServicio;
     
+    @Autowired
+    private MayusculasEditor mayusculasEditor;
+    
     
     @InitBinder
     public void initBinder(WebDataBinder binder){
@@ -33,6 +37,13 @@ public class TrabajadorControlador {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat,false));
+        
+        
+        binder.registerCustomEditor(String.class,"primerNombre",mayusculasEditor);
+        binder.registerCustomEditor(String.class,"segundoNombre",mayusculasEditor);
+        binder.registerCustomEditor(String.class,"primerApellido",mayusculasEditor);
+        binder.registerCustomEditor(String.class,"segundoApellido",mayusculasEditor);
+        
     }
     
     
@@ -47,7 +58,7 @@ public class TrabajadorControlador {
     
     @GetMapping(value="agregarTrabajador")
     public String agregarTrabajador(Trabajador trabajador){
-        return "trabajadores/agregarTrabajador";
+        return "trabajadores/editarTrabajador";
     }
     
     @PostMapping("/guardarTrabajador")
@@ -62,18 +73,12 @@ public class TrabajadorControlador {
             
             log.info("Hubo un error , redirigiendo hacia la vista agregarTrabajador");
             log.info(result.toString());
-            return "trabajadores/agregarTrabajador";
+            return "trabajadores/editarTrabajador";
         }
         
         
         trabajadorServicio.guardar(trabajador);
         return "redirect:/";
-    }
-    
-    @GetMapping("/modificarTrabajador")
-    public String modificarTrabajador(Model model , Trabajador trabajador){
-    
-        return null;
     }
     
     @GetMapping("/eliminarTrabajador")

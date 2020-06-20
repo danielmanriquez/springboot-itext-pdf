@@ -155,7 +155,7 @@ public class GenerarDocumento {
             
             table.addCell(valorIdTrabajador);    
                 
-            PdfPCell valorNombre = new PdfPCell(new Paragraph(trabajador.getNombre(), tableBody));
+            PdfPCell valorNombre = new PdfPCell(new Paragraph(trabajador.getPrimerNombre(), tableBody));
             valorNombre.setBorderColor(BaseColor.BLACK);
             valorNombre.setPaddingLeft(10);
             valorNombre.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -165,7 +165,7 @@ public class GenerarDocumento {
             
             table.addCell(valorNombre);
             
-            PdfPCell valorApellido = new PdfPCell(new Paragraph(trabajador.getApellido(), tableBody));
+            PdfPCell valorApellido = new PdfPCell(new Paragraph(trabajador.getPrimerApellido(), tableBody));
             valorApellido.setBorderColor(BaseColor.BLACK);
             valorApellido.setPaddingLeft(10);
             valorApellido.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -287,7 +287,7 @@ public class GenerarDocumento {
             tablaDatos.setSpacingBefore(10f);
             tablaDatos.setSpacingAfter(10);
 
-            tablaDatos.addCell("Nombre : " + trabajador.getNombre() + " " + trabajador.getApellido());
+            tablaDatos.addCell("Nombre : " + trabajador.getNombreCompleto());
 
             tablaDatos.addCell("Rut : " + trabajador.getRut());
             tablaDatos.addCell("AFP : " + trabajador.getAfp());
@@ -365,9 +365,9 @@ public class GenerarDocumento {
             
             tablaCuerpoDescuentos.addCell("Total Descuentos Previsionales");
             
-            String descuentos = liquidacion.getDescuentoCotizacionPrevisional() + liquidacion.getDescuentoCotizacionSalud().toString();
+            Double descuentos = liquidacion.getDescuentoCotizacionPrevisional() + liquidacion.getDescuentoCotizacionSalud();
             
-            tablaCuerpoDescuentos.addCell(descuentos);
+            tablaCuerpoDescuentos.addCell(descuentos.toString());
             
             document.add(tablaCuerpoDescuentos);
             
@@ -401,7 +401,7 @@ public class GenerarDocumento {
             
             Paragraph parrafoConforme = new Paragraph("", paragraphFont);
             parrafoConforme.add(new Chunk
-        ("Yo "+trabajador.getNombre() + " " + trabajador.getApellido() + " " + "certifico que he recibido de mi empleador " + liquidacion.getNOMBRE_EMPRESA() ));
+        ("Yo "+trabajador.getNombreCompleto() + " certifico que he recibido de mi empleador " + liquidacion.getNOMBRE_EMPRESA() ));
             parrafoConforme.add(new Chunk
         (" a mi total y entera satisfacción el saldo líquido indicado en la presente liquidación, sin tener cargo ni"));
             parrafoConforme.add(new Chunk
@@ -422,28 +422,7 @@ public class GenerarDocumento {
             document.add(new Chunk(Chunk.NEWLINE));
             document.add(new Chunk(Chunk.NEWLINE));
             
-            
-            
-            
-            
-            /**Firmas**/
-           
-//            Paragraph firmaTrabajador = new Paragraph(new Chunk("  Firma Trabajador  ").setUnderline(1.5f, 11));
-//            firmaTrabajador.setAlignment(Element.ALIGN_LEFT);
-//            
-//            Paragraph firmaEmpleador = new Paragraph(new Chunk("  Firma Empleador  ").setUnderline(1.5f, 11));
-//            firmaEmpleador.setAlignment(Element.ALIGN_RIGHT);
-//            
-//            Paragraph firmas = new Paragraph();
-//            firmas.add(firmaTrabajador);
-//            firmas.add(firmaEmpleador);
-//            
-//            
-//            
-//            
-//            document.add(firmas);
-            //document.add(firmaEmpleador);
-            
+          
             PdfPTable tablaFirmas = new PdfPTable(2);
             
             tablaFirmas.setWidthPercentage(100f);

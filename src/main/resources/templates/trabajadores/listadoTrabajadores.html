@@ -28,9 +28,7 @@
             <table class="table text-primary table-responsive">
               <thead class="thead-dark">
                 <tr>
-                  <th scope="col">[[#{trabajador.idTrabajador}]]</th>
-                  <th scope="col">[[#{trabajador.nombre}]]</th>
-                  <th scope="col">[[#{trabajador.apellido}]]</th>
+                  <th scope="col">[[#{trabajador.nombreCompleto}]]</th>
                   <th scope="col">[[#{trabajador.fechaNacimiento}]]</th>
                   <th scope="col">[[#{trabajador.rut}]]</th>
                   <th scope="col">[[#{trabajador.afp}]]</th>
@@ -44,9 +42,7 @@
 
                 <tr th:each="trabajador, contador : ${trabajadores}">
 
-                  <td>[[${trabajador.idTrabajador}]]</td>
-                  <td>[[${trabajador.nombre}]]</td>
-                  <td>[[${trabajador.apellido}]]</td>
+                  <td>[[${trabajador.nombreCompleto}]]</td>
                   <td>[[${#dates.format(trabajador.fechaNacimiento ,'yyyy-MM-dd')}]]</td>
                   <td>[[${trabajador.rut}]]</td>
                   <td>[[${trabajador.afp}]]</td>

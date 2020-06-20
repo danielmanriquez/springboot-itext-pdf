@@ -28,10 +28,17 @@ public class Trabajador implements Serializable {
     private Integer idTrabajador;
     
     @NotBlank
-    private String nombre;
+    private String primerNombre;
     
     @NotBlank
-    private String apellido;
+    private String segundoNombre;
+    
+    
+    @NotBlank
+    private String primerApellido;
+    
+    @NotBlank
+    private String segundoApellido;
     
     @Pattern(regexp="[0-9]{2}[.][\\d]{3}[.][\\d]{3}[-][\\d]{1}")
     @NotBlank
@@ -47,6 +54,12 @@ public class Trabajador implements Serializable {
     
     @NotBlank
     private String salud;
+    
+    
+    public String getNombreCompleto(){
+    
+        return primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido;
+    }
     
     
     
