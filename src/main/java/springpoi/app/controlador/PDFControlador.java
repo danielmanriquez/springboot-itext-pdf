@@ -12,8 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import springpoi.app.model.Trabajador;
+import springpoi.app.servicio.IDocumentoServicio;
 import springpoi.app.servicio.ITrabajadorServicio;
-import springpoi.app.util.GenerarLiquidacion;
+import springpoi.app.util.GenerarDocumento;
 
 @Controller
 @RequestMapping("/pdf")
@@ -23,13 +24,16 @@ public class PDFControlador {
     private ITrabajadorServicio trabajadorServicio;
     
     @Autowired
+    private IDocumentoServicio documentoServicio;
+    
+    @Autowired
     private ServletContext context;
     
     @GetMapping(value="/crearPdf")
     public String crearPdf(HttpServletRequest request , HttpServletResponse response){
         
         List<Trabajador> trabajadores = trabajadorServicio.listarTrabajadores();
-        boolean bandera = trabajadorServicio.crearPdf(trabajadores , context , request , response);
+        boolean bandera = documentoServicio.listaTrabajadores(trabajadores, context);
         
         if(bandera){
             String rutaCompleta = request.getServletContext().getRealPath("/resources/reportes/"+"trabajadores"+".pdf");
@@ -43,7 +47,7 @@ public class PDFControlador {
     public String crearPdfLiquidacion(Trabajador trabajador, HttpServletRequest request , HttpServletResponse response){
         
         trabajador = trabajadorServicio.encontrarTrabajador(trabajador);
-        boolean bandera = GenerarLiquidacion.crearLiquidacionTrabajador(trabajador, context, request, response);
+        boolean bandera = documentoServicio.crearLiquidacionTrabajador(trabajador, context);
         
         if(bandera){
             String rutaCompleta = request.getServletContext().getRealPath("/resources/reportes/"+"trabajador_"+trabajador.getIdTrabajador()+".pdf");

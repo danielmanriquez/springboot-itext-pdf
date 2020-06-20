@@ -17,6 +17,5 @@ public interface ITrabajadorServicio {
     
     public Trabajador encontrarTrabajador(Trabajador trabajador);
 
-    public boolean crearPdf(List<Trabajador> trabajadores, ServletContext context, HttpServletRequest request, HttpServletResponse response);
     
 }

@@ -3,104 +3,103 @@ import java.util.Calendar;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class LiquidacionDeSueldo {
+public class LiquidacionDeSueldo extends Documento {
 
-    public static final Double SUELDO_BASE = 300000d ;
-
-    private Calendar fecha;
     private Integer diasTrabajados;
     private Double otrosIngresosImponibles;
-    private Double asignacionFamiliar;
-    private Double totalRemuneracionImponible;
-    private Double descuentoCotizacionPrevisional;
-    private Double descuentoCotizacionSalud;
-    private Double descuentoCotizacionVoluntaria;
-    private Double alcanceLiquido;
     private Double anticipo;
 
-    public LiquidacionDeSueldo(int diasTrabajados) {
-        this.diasTrabajados = diasTrabajados;
-        this.calcularLiquidacion();
-        this.fecha= Calendar.getInstance();
-       
-    }
-
     public LiquidacionDeSueldo() {
-
-        this.diasTrabajados = 31;
-        this.calcularLiquidacion();
-        this.fecha= Calendar.getInstance();
+        super();
+        this.diasTrabajados = 30;
+        otrosIngresosImponibles = 0.0;
+        anticipo = 0.0;
     }
 
-    public void calcularLiquidacion() {
-
-        otrosIngresosImponibles = 00d;
-        asignacionFamiliar = 00d;
-        totalRemuneracionImponible = (SUELDO_BASE / diasTrabajados) * diasTrabajados;
-        descuentoCotizacionPrevisional = totalRemuneracionImponible * 10 / 100;
-        descuentoCotizacionSalud = totalRemuneracionImponible * 7 / 100;
-        descuentoCotizacionVoluntaria = 00d;
-        anticipo = 00d;
-        alcanceLiquido = totalRemuneracionImponible - descuentoCotizacionPrevisional - descuentoCotizacionSalud;
+    public LiquidacionDeSueldo(int diasTrabajados, Calendar fechaDocumento) {
+        super(fechaDocumento);
+        this.diasTrabajados = diasTrabajados;
+        otrosIngresosImponibles = 0.0;
+        anticipo = 0.0;
     }
-
-    
 
     public Integer getDiasTrabajados() {
         return diasTrabajados;
+    }
+
+    public void setDiasTrabajados(int diasTrabajados) {
+        this.diasTrabajados = diasTrabajados;
     }
 
     public Double getOtrosIngresosImponibles() {
         return otrosIngresosImponibles;
     }
 
-    public Double getAsignacionFamiliar() {
-        return asignacionFamiliar;
-    }
-
-    public Double getTotalRemuneracionImponible() {
-        return totalRemuneracionImponible;
-    }
-
-    public Double getDescuentoCotizacionPrevisional() {
-        return descuentoCotizacionPrevisional;
-    }
-
-    public Double getDescuentoCotizacionSalud() {
-        return descuentoCotizacionSalud;
-    }
-
-    public Double getDescuentoCotizacionVoluntaria() {
-        return descuentoCotizacionVoluntaria;
-    }
-
-    public Double getAlcanceLiquido() {
-        return alcanceLiquido;
+    public void setOtrosIngresosImponibles(Double otrosIngresosImponibles) {
+        this.otrosIngresosImponibles = otrosIngresosImponibles;
     }
 
     public Double getAnticipo() {
         return anticipo;
     }
 
-    public void setDiasTrabajados(int diasTrabajados) {
-        
-        this.diasTrabajados = diasTrabajados;
-        this.calcularLiquidacion();
+    public void setAnticipo(Double anticipo) {
+        this.anticipo = anticipo;
     }
 
+    public Double getTotalRemuneracionImponible() {
 
-    public Calendar getFecha() {
-        return fecha;
+        return (SUELDO_BASE / 30) * diasTrabajados;
     }
 
-    public void setFecha(Calendar fecha) {
-        this.fecha = fecha;
+    public Double getDescuentoCotizacionPrevisional() {
+
+        return getTotalRemuneracionImponible() * 10 / 100;
     }
 
+    public Double getDescuentoCotizacionSalud() {
+
+        return getTotalRemuneracionImponible() * 7 / 100;
+    }
+
+    public Double getAlcanceLiquido() {
+
+        return getTotalRemuneracionImponible() - getDescuentoCotizacionPrevisional() - getDescuentoCotizacionSalud();
+
+    }
+
+    @Override
+    public Calendar getFechaDocumento() {
+        return super.getFechaDocumento(); //To change body of generated methods, choose Tools | Templates.
+    }
+    /**Variables finales de la interface**/
+
+    public static String getNOMBRE_EMPRESA() {
+        return NOMBRE_EMPRESA;
+    }
+
+    public static String getRUT_EMPRESA() {
+        return RUT_EMPRESA;
+    }
+
+    public static Double getSUELDO_BASE() {
+        return SUELDO_BASE;
+    }
+
+    public static int getTOTAL_DIAS_MES() {
+        return TOTAL_DIAS_MES;
+    }
     
     
     
     
+    
+    
+    @Override
+    public String toString() {
+        return "Total Remuneracion Imponible : " + getTotalRemuneracionImponible()
+                + " Descuento AFP : " + getDescuentoCotizacionPrevisional()
+                + " Descuento Salud :" + getDescuentoCotizacionSalud();
+    }
+
 }
-    
-
