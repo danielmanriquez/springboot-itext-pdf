@@ -33,7 +33,6 @@ public class Trabajador implements Serializable {
     @NotBlank
     private String segundoNombre;
     
-    
     @NotBlank
     private String primerApellido;
     

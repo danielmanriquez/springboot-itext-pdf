@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      >
+  <head th:replace="plantillas/plantillaCssScript :: head">
+    <title>INICIO PDF</title>
+  </head>
+  <body>
+
+    <section th:replace="plantillas/pdf/plantillaPrincipalPdf :: headerPlantillaPdf"></section>
+    <section th:replace="plantillas/pdf/plantillaPrincipalPdf :: datosTrabajador"></section>
+
+    <section id="contenido">
+      <div class="container m-2">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card bg-warning text-primary">
+              <div class="card-header">
+                <span>[[#{pdf.generarLiquidacionSinFecha}]]</span>
+                <a th:href="@{/pdf/crearPdfLiquidacion(idTrabajador=${trabajador.idTrabajador})}"
+                   class="btn btn-dark">
+                  <i class="fas fa-file-pdf"></i> [[#{pdf.generar}]]
+                </a>
+              </div>
+              <div class="card-footer">
+                <span>[[#{pdf.generarLiquidacionConFecha}]]</span>
+                <form action="/pdf/crearPdfLiquidacion(idTrabajador=${trabajador.idTrabajador})">
+
+                  <input type ="date" name="fecha">
+
+                    <button type="submit" class="btn btn-dark" >
+                      <i class="fas fa-file-pdf"></i> [[#{pdf.generar}]]
+                    </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <section th:replace="plantillas/pdf/plantillaPrincipalPdf :: footerPlantillaPdf"></section>
+
+  </body>
+</html>

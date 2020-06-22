@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      >
+  <head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+
+    <section th:fragment="headerPlantillaPdf">
+
+      <div class="container m-2">
+        <div class="row card bg-dark text-primary">
+          <div class="col-md text-center m-2">
+            <a th:href="@{/vistasPdf/salirPdf}" class="btn btn-primary">[[#{menu.regresar}]]</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section th:fragment="datosTrabajador">
+      <div class="container m-2">
+        <div class="row">
+          <div class="col-md">
+            <div class="card text-center">
+              <div class="card-header bg-dark text-primary m-2">
+                [[#{menu.datosTrabajador}]]
+              </div>
+              <p>
+                [[${trabajador.nombreCompleto}]] <br/>
+                [[${trabajador.rut}]]<br/>
+                [[${trabajador.afp}]]<br/>
+                [[${trabajador.salud}]]<br/>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section th:fragment="footerPlantillaPdf">
+      <div class="container m-2">
+        <div class="row card bg-dark text-primary">
+          <div class="col text-center">
+            <small>[[#{inicio.footer}]]</small>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

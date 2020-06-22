@@ -1,4 +1,4 @@
-package springpoi.app.editores;
+package springpoi.app.util;
 
 import java.beans.PropertyEditorSupport;
 import org.springframework.stereotype.Component;
