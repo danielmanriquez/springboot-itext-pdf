@@ -34,5 +34,11 @@ public class DocumentoServicio implements IDocumentoServicio {
         
         return generarDocumento.crearLiquidacionTrabajador(trabajador, context);
     }
+
+    @Override
+    public boolean crearContratoTrabajador(Trabajador trabajador, ServletContext context) {
+        
+        return generarDocumento.crearContratoTrabajador(trabajador, context);
+    }
     
 }

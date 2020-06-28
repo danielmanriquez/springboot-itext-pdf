@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import springpoi.app.util.MayusculasEditor;
+import springpoi.app.util.editores.MayusculasEditor;
 import springpoi.app.model.Trabajador;
 import springpoi.app.servicio.ITrabajadorServicio;
 

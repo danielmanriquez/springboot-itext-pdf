@@ -462,5 +462,74 @@ public class GenerarDocumento {
         }
 
     }
+    
+    public boolean crearContratoTrabajador(Trabajador trabajador, ServletContext context) {
+        
+        LiquidacionDeSueldo liquidacion = new LiquidacionDeSueldo();
+        
+        Document document = new Document(PageSize.A4, 15, 15, 45, 30);
 
+        try {
+
+            String filePath = context.getRealPath("/resources/reportes");
+            File file = new File(filePath);
+            boolean archivoYaExiste = new File(filePath).exists();
+
+            if (!archivoYaExiste) {
+                new File(filePath).mkdirs();
+            }
+
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file + "/" + "trabajador_contrato_" + trabajador.getIdTrabajador() + ".pdf"));
+
+            //Abrimos archivo pdf para ingresar los datos.
+            document.open();
+
+            /**
+             * Inicio Titulo *
+             */
+            Paragraph saltoDeLinea = new Paragraph();
+
+            Paragraph titulo = new Paragraph("Contrato de Trabajo", paragraphFont);
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            titulo.setIndentationLeft(50);
+            titulo.setIndentationRight(50);
+            titulo.setSpacingAfter(10);
+
+            document.add(titulo);
+
+            /**
+             * Fin titulo*
+             */
+            
+            /**Inicio Documento**/
+            
+            
+            Paragraph primerParrafo = new Paragraph("", paragraphFont);
+            primerParrafo.add(new Chunk
+        ("En la ciudad de " + "Santiago " + "con fecha "+ new SimpleDateFormat("dd MMMM yyyy").format(liquidacion.getFechaDocumento().getTime())));
+            primerParrafo.add(new Chunk
+        (""));
+            
+            
+            document.add(primerParrafo);
+            
+            
+            /**Fin Documento**/
+            
+            
+            
+            document.close();
+            writer.close();
+
+            return true;
+
+        } catch (Exception e) {
+
+            return false;
+
+        }
+
+    }
+    
+    
 }

@@ -58,6 +58,21 @@ public class PDFControlador {
         return null;
     }
     
+    @GetMapping(value="/crearPdfContrato")
+    public String crearPdfContrato(Trabajador trabajador, HttpServletRequest request , HttpServletResponse response){
+        
+        trabajador = trabajadorServicio.encontrarTrabajador(trabajador);
+        boolean bandera = documentoServicio.crearContratoTrabajador(trabajador, context);
+        
+        if(bandera){
+            String rutaCompleta = request.getServletContext().getRealPath("/resources/reportes/"+"trabajador_contrato_"+trabajador.getIdTrabajador()+".pdf");
+            filedownload(rutaCompleta , response , "trabajador_contrato_"+trabajador.getIdTrabajador()+".pdf");
+        }
+                
+        return null;
+    }
+    
+    
 
     private void filedownload(String rutaCompleta, HttpServletResponse response, String nombreArchivo) {
         

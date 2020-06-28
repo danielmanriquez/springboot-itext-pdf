@@ -42,9 +42,6 @@ public class VistasPdfControlador {
     
     @GetMapping(value="/vistaGenerarLiquidacion")
     public String inicioPdf (Model model) {
-        
-        
-        
         return "pdf/generarLiquidacion";
     }
     

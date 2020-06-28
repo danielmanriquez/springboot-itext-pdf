@@ -18,29 +18,51 @@ and open the template in the editor.
     <section id="contenido">
       <div class="container m-2">
         <div class="row">
-          <div class="col-md-4">
-            <div class="card bg-warning text-primary">
-              <div class="card-header">
-                <span>[[#{pdf.generarLiquidacionSinFecha}]]</span>
-                <a th:href="@{/pdf/crearPdfLiquidacion(idTrabajador=${trabajador.idTrabajador})}"
-                   class="btn btn-dark">
-                  <i class="fas fa-file-pdf"></i> [[#{pdf.generar}]]
+          <div class="col-md-3">
+            <div class="card mx-auto bg-info">
+              <div class="card-header text-center">
+                <a th:href="@{/pdf/crearPdfLiquidacion(idTrabajador=${trabajador.idTrabajador})}" class="btn btn-dark text-white">
+                  <i class="fas fa-file-pdf"></i> [[#{pdf.generarLiquidacion}]]
                 </a>
               </div>
-              <div class="card-footer">
-                <span>[[#{pdf.generarLiquidacionConFecha}]]</span>
-                <form action="/pdf/crearPdfLiquidacion(idTrabajador=${trabajador.idTrabajador})">
 
-                  <input type ="date" name="fecha">
-
-                    <button type="submit" class="btn btn-dark" >
-                      <i class="fas fa-file-pdf"></i> [[#{pdf.generar}]]
-                    </button>
-                </form>
-              </div>
             </div>
           </div>
+          <div class="col-md-3">
+            <div class="card mx-auto bg-warning">
+              <div class="card-header text-center">
+                <a th:href="@{/pdf/crearPdfContrato(idTrabajador=${trabajador.idTrabajador})}" class="btn btn-dark text-white">
+                  <i class="fas fa-file-pdf"></i> [[#{pdf.generarContrato}]]
+                </a>
+              </div>
+
+            </div>
+          </div>
+          
+          <div class="col-md-3">
+            <div class="card mx-auto bg-success">
+              <div class="card-header text-center">
+                <a th:href="@{/vistasPdf/vistaGenerarLiquidacion}" class="btn btn-dark text-white">
+                  <i class="fas fa-file-pdf"></i> [[#{pdf.generarFiniquito}]]
+                </a>
+              </div>
+
+            </div>
+          </div>
+          
+          <div class="col-md-3">
+            <div class="card mx-auto bg-secondary">
+              <div class="card-header text-center">
+                <a th:href="@{/vistasPdf/vistaGenerarLiquidacion}" class="btn btn-dark text-white">
+                  <i class="fas fa-file-pdf"></i> [[#{pdf.generarFichaTrabajador}]]
+                </a>
+              </div>
+
+            </div>
+          </div>
+          
         </div>
+      </div>
     </section>
 
     <section th:replace="plantillas/pdf/plantillaPrincipalPdf :: footerPlantillaPdf"></section>

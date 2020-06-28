@@ -8,6 +8,7 @@ public interface IDocumentoServicio {
     
     public boolean listaTrabajadores (List<Trabajador> trabajadores, ServletContext context);
     public boolean crearLiquidacionTrabajador(Trabajador trabajador, ServletContext context);
+    public boolean crearContratoTrabajador(Trabajador trabajador, ServletContext context);
     
     
 }
